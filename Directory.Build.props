@@ -1,0 +1,16 @@
+<Project>
+    <PropertyGroup>
+      <!--
+          <Version>1.0.1.3</Version>
+      -->
+        <Version>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)Version.txt"))</Version>
+        <Company></Company>
+        <Authors>Florian Grimm</Authors>
+        <Product>AutoCodeFix</Product>
+        <Title></Title>
+        <Copyright>Copyright © 2020</Copyright>
+        <RootDirectory>$(MSBuildThisFileDirectory)</RootDirectory>
+        <BaseIntermediateOutputPath>$(RootDirectory)output\$(MSBuildProjectName)\obj\$(PlatformName)</BaseIntermediateOutputPath>
+        <BaseOutputPath>$(RootDirectory)output\$(MSBuildProjectName)\bin\$(PlatformName)</BaseOutputPath>
+    </PropertyGroup>
+</Project>
