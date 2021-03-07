@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCodeFixLibrary", "src\AutoCodeFixLibrary\AutoCodeFixLibrary.csproj", "{3329A94B-57CA-4B50-A36A-7A32AAEDB384}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFix.Library", "src\AutoRunCodeFix.Library\AutoRunCodeFix.Library.csproj", "{3329A94B-57CA-4B50-A36A-7A32AAEDB384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCodeFixer", "src\AutoCodeFixer\AutoCodeFixer.csproj", "{BB1684B0-8906-422A-A0D2-037923FAA924}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFixer", "src\AutoRunCodeFixer\AutoRunCodeFixer.csproj", "{BB1684B0-8906-422A-A0D2-037923FAA924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCodeFixAnalyzer", "src\AutoCodeFixAnalyzer\AutoCodeFixAnalyzer.csproj", "{D6C1C9D6-39B8-4307-A81E-3BFCF0FDE0CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFix.Analyser", "src\AutoRunCodeFix.Analyser\AutoRunCodeFix.Analyser.csproj", "{D6C1C9D6-39B8-4307-A81E-3BFCF0FDE0CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAnalyzer", "src\SampleAnalyzer\SampleAnalyzer.csproj", "{7256A907-6BC9-42CF-806A-BFF57A16729C}"
 EndProject

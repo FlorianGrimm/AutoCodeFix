@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnalyzerDescription" xml:space="preserve">
-    <value>Run CodeFixGenerator.</value>
+    <value>Run AutoRun CodeFixGenerator.</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="AnalyzerMessageFormat" xml:space="preserve">
@@ -126,11 +126,11 @@
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="AnalyzerTitle" xml:space="preserve">
-    <value>CodeFixGeneratorAnalyzer</value>
+    <value>AutoRunAnalyzer</value>
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="CodeFixTitle" xml:space="preserve">
-    <value>CodeFixGenerator</value>
+    <value>AutoRun.</value>
     <comment>The title of the code fix.</comment>
   </data>
 </root>

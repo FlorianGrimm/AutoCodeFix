@@ -1,4 +1,4 @@
-﻿namespace Microsoft.CodeAnalysis {
+﻿namespace AutoRunCodeFix {
     [System.AttributeUsage(System.AttributeTargets.All, AllowMultiple = true)]
     internal sealed class AutoCodeFixAttribute : System.Attribute {
         public AutoCodeFixAttribute(string codeFixId) {

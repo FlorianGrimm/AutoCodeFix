@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CodeRefactorings;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics.Tracing;
+using System.Diagnostics.CodeAnalysis;
 
-namespace AutoCodeFixAnalyzer {
+namespace AutoRunCodeFix.Analyser {
     // [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(CodeRefactoringCodeRefactoringProvider)), Shared]
-    public class AutoCodeRefactoringProvider : CodeRefactoringProvider {
+    public class AutoRunRefactoringProvider : CodeRefactoringProvider {
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context) {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
             if (root is null) { return; }

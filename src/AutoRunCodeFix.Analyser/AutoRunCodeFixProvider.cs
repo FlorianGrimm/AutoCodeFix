@@ -13,13 +13,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Linq;
 using Microsoft.CodeAnalysis.Editing;
 using System.Threading;
+using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace AutoCodeFixAnalyzer {
+namespace AutoRunCodeFix.Analyser {
     public interface IAutoCodeFixProvider {
     }
 
     //[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AutoCodeFixProvider)), Shared]
-    public class AutoCodeFixProvider : CodeFixProvider, IAutoCodeFixProvider {
+    public class AutoRunCodeFixProvider : CodeFixProvider, IAutoCodeFixProvider {
         private const string title = "Remove unused local";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds {
@@ -41,10 +42,18 @@ namespace AutoCodeFixAnalyzer {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
             if (root == null) { return; }
 
+            //  context.RegisterCodeFix(
+            //          CodeAction.Create(title:title, 
+            //          createChangedSolution: cancellationToken => cc(cancellationToken),
+            //          title
+            //      ),
+            //      context.Diagnostics //.Where(d=>d.Id)
+            //  );
+
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedDocument: c => RemoveDeclarationAsync(context.Document, root, nodeToRemove, c),
+                    createChangedDocument: cancellationToken => RemoveDeclarationAsync(context.Document, root, nodeToRemove, cancellationToken),
                     equivalenceKey: title),
                 diagnostic);
         }
@@ -69,6 +78,7 @@ namespace AutoCodeFixAnalyzer {
             // Bail out for code with syntax errors - parent of a declaration is not a local declaration statement.
             var variableDeclaration = variableDeclarator.Parent as VariableDeclarationSyntax;
             if (variableDeclaration == null) { return null; }
+
             var localDeclaration = variableDeclaration.Parent as LocalDeclarationStatementSyntax;
             if (localDeclaration == null) { return null; }
 
@@ -174,7 +184,7 @@ namespace AutoCodeFixAnalyzer {
                 ImmutableArray<Diagnostic> diagnostics = pair.Value;
                 var nodesToRemove = new HashSet<SyntaxNode>();
                 foreach (var diagnostic in diagnostics) {
-                    var nodeToRemove = await AutoCodeFixProvider.GetNodeToRemoveAsync(document, diagnostic, cancellationToken).ConfigureAwait(false);
+                    var nodeToRemove = await AutoRunCodeFixProvider.GetNodeToRemoveAsync(document, diagnostic, cancellationToken).ConfigureAwait(false);
                     if (nodeToRemove != null) {
                         nodesToRemove.Add(nodeToRemove);
                     }

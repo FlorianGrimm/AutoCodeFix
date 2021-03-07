@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoCodeFixAnalyzer {
+namespace AutoRunCodeFix.Analyser {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AutoCodeFixAnalyzer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoCodeFixAnalyzer.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoRunCodeFix.Analyser.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace AutoCodeFixAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run CodeFixGenerator..
+        ///   Looks up a localized string similar to Run AutoRun CodeFixGenerator..
         /// </summary>
         internal static string AnalyzerDescription {
             get {
@@ -79,7 +79,7 @@ namespace AutoCodeFixAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CodeFixGeneratorAnalyzer.
+        ///   Looks up a localized string similar to AutoRunAnalyzer.
         /// </summary>
         internal static string AnalyzerTitle {
             get {
@@ -88,7 +88,7 @@ namespace AutoCodeFixAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CodeFixGenerator.
+        ///   Looks up a localized string similar to AutoRun..
         /// </summary>
         internal static string CodeFixTitle {
             get {

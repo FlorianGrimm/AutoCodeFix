@@ -1,10 +1,13 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.MSBuild;
 
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -78,10 +81,11 @@ namespace AutoCodeFixer {
 
             {
                 using var workspace = AnalyzerRunnerHelper.CreateWorkspace();
+                SolutionProcessInfo? solutionInfo = null;
                 Solution? solution = null;
                 Project? project = null;
-                var lstAllProjectId = new List<ProjectId>();
-                var lstFilteredProjectId = new List<ProjectId>();
+                //var lstAllProjectId = new List<ProjectId>();
+                //var lstFilteredProjectId = new List<ProjectId>();
 
                 if (fileSolution is object) {
                     if (!fileSolution.Exists) {
@@ -89,12 +93,17 @@ namespace AutoCodeFixer {
                         return 1;
                     }
                     solution = await workspace.OpenSolutionAsync(fileSolution.FullName, progress: null, cancellationToken).ConfigureAwait(false);
+                    solutionInfo = new SolutionProcessInfo(workspace, solution);
+                    foreach (var projectId in solution.GetProjectDependencyGraph().GetTopologicallySortedProjects(cancellationToken)) {
+                        solutionInfo.AddProjectInfo(projectId, false);
+                    }
                     if (fileProject is object) {
                         var fullNameProject = fileProject.FullName;
                         var lstProjects = solution.Projects.Where(prj => string.Equals(prj.FilePath, fullNameProject, StringComparison.OrdinalIgnoreCase)).ToList();
                         if (lstProjects.Count == 1) {
                             project = lstProjects[0];
-                            lstFilteredProjectId.Add(project.Id);
+                            //lstFilteredProjectId.Add(project.Id);
+                            solutionInfo.AddProjectInfo(project.Id, true);
                         } else if (lstProjects.Count > 1) {
                             await System.Console.Error.WriteLineAsync($"For file {fileProject.FullName} found {lstProjects.Count} projects ?? Unexpected.");
                             return 1;
@@ -103,7 +112,8 @@ namespace AutoCodeFixer {
                             return 1;
                         }
                     }
-                    lstAllProjectId.AddRange(solution.GetProjectDependencyGraph().GetTopologicallySortedProjects(cancellationToken));
+                    //lstAllProjectId.AddRange(solution.GetProjectDependencyGraph().GetTopologicallySortedProjects(cancellationToken));
+
                 } else if (fileProject is object) {
                     if (!fileProject.Exists) {
                         await System.Console.Error.WriteLineAsync($"Project {fileProject.FullName} does not exists.");
@@ -111,34 +121,73 @@ namespace AutoCodeFixer {
                     }
                     project = await workspace.OpenProjectAsync(fileProject.FullName, null, cancellationToken).ConfigureAwait(false);
                     solution = project.Solution;
-                    lstAllProjectId.Add(project.Id);
-                    lstFilteredProjectId.Add(project.Id);
+                    solutionInfo = new SolutionProcessInfo(workspace, solution);
+                    solutionInfo.AddProjectInfo(project.Id, true);
+                    //lstAllProjectId.Add(project.Id);
+                    //lstFilteredProjectId.Add(project.Id);
                 } else {
                     await System.Console.Error.WriteLineAsync($"No solution nor project loaded.");
                     return 1;
                 }
-                await RunLoadAnalzerAsync(solution, project, lstFilteredProjectId, lstAllProjectId);
+                //await RunLoadAnalzerAsync(solution, project, lstFilteredProjectId, lstAllProjectId);
+                await RunLoadAnalzerAsync(solutionInfo, cancellationToken);
             }
             return 0;
         }
 
         private static async Task RunLoadAnalzerAsync(
-                Solution solution,
-                Project? project,
-                List<ProjectId> lstFilteredProjectId,
-                List<ProjectId> lstAllProjectId
+            SolutionProcessInfo solutionInfo,
+            CancellationToken cancellationToken
             ) {
-            foreach (var projectId in lstFilteredProjectId) {
-                var prj = solution.GetProject(projectId);
-                if (prj is null) { continue; }
-                foreach (var analyzerReference in prj.AnalyzerReferences) {
-                    var analyzers = analyzerReference.GetAnalyzers(prj.Language);
-                    foreach(var analyzer in analyzers) {
+            foreach (var projectInfo in solutionInfo.ProjectInfos) {
+                var project = solutionInfo.Solution.GetProject(projectInfo.ProjectId);
+                if (project is null) { continue; }
+                // 
+                if (project.SupportsCompilation) {
+                    if (!((project.Language == LanguageNames.CSharp)
+                        || (project.Language == LanguageNames.VisualBasic))) {
+                        continue;
+                    }
 
+                    var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                    // compilation.WithAnalyzers()
+                    //compilation.GetA
+                    if (projectInfo.IncludeInProcess) {
+                        //
+                        foreach (var analyzerReference in project.AnalyzerReferences) {
+                            var analyzers = analyzerReference.GetAnalyzers(project.Language);
+                            foreach (var analyzer in analyzers) {
+                                
+                                //analyzer.Initialize
+                            }
+                        }
+                        //
+                    } else {
+                        //
+                        //
                     }
                 }
             }
             await Task.Yield();
         }
+
+        //private static async Task RunLoadAnalzerAsync(
+        //        Solution solution,
+        //        Project? project,
+        //        List<ProjectId> lstFilteredProjectId,
+        //        List<ProjectId> lstAllProjectId
+        //    ) {
+        //    foreach (var projectId in lstFilteredProjectId) {
+        //        var prj = solution.GetProject(projectId);
+        //        if (prj is null) { continue; }
+        //        foreach (var analyzerReference in prj.AnalyzerReferences) {
+        //            var analyzers = analyzerReference.GetAnalyzers(prj.Language);
+        //            foreach (var analyzer in analyzers) {
+        //            }
+        //        }
+        //    }
+        //    await Task.Yield();
+        //}
     }
+
 }
