@@ -6,6 +6,7 @@ using System.Collections.Immutable;
 
 namespace AutoRunCodeFix.Analyser {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    //[AutoRunDiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AutoRunDiagnosticAnalyzer : DiagnosticAnalyzer {
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics {
