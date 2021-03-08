@@ -30,7 +30,7 @@ namespace AutoRunCodeFix.Analyser {
 
         private static void AnalyzeSymbol(SymbolAnalysisContext context) {
             // context.ReportDiagnostic();
-            var x=context.Compilation.GetTypeByMetadataName(AutoRunWellknownNames. "AutoRunCodeFix.AutoCodeFixAttribute");
+            var metadataNameAutoCodeFix = context.Compilation.GetTypeByMetadataName(AutoRunWellknownNames.AutoRunCodeFix_AutoCodeFixAttribute);
         }
 
         private static void AnalyzeSemanticModel(SemanticModelAnalysisContext context) {

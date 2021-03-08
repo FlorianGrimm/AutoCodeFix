@@ -1,25 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30803.129
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFix.Library", "src\AutoRunCodeFix.Library\AutoRunCodeFix.Library.csproj", "{3329A94B-57CA-4B50-A36A-7A32AAEDB384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRunCodeFix.Library", "src\AutoRunCodeFix.Library\AutoRunCodeFix.Library.csproj", "{3329A94B-57CA-4B50-A36A-7A32AAEDB384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFixer", "src\AutoRunCodeFixer\AutoRunCodeFixer.csproj", "{BB1684B0-8906-422A-A0D2-037923FAA924}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRunCodeFixer", "src\AutoRunCodeFixer\AutoRunCodeFixer.csproj", "{BB1684B0-8906-422A-A0D2-037923FAA924}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRunCodeFix.Analyser", "src\AutoRunCodeFix.Analyser\AutoRunCodeFix.Analyser.csproj", "{D6C1C9D6-39B8-4307-A81E-3BFCF0FDE0CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRunCodeFix.Analyser", "src\AutoRunCodeFix.Analyser\AutoRunCodeFix.Analyser.csproj", "{D6C1C9D6-39B8-4307-A81E-3BFCF0FDE0CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAnalyzer", "src\SampleAnalyzer\SampleAnalyzer.csproj", "{7256A907-6BC9-42CF-806A-BFF57A16729C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleAnalyzer", "src\SampleAnalyzer\SampleAnalyzer.csproj", "{7256A907-6BC9-42CF-806A-BFF57A16729C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLibrary", "src\SampleLibrary\SampleLibrary.csproj", "{B4953BE5-72C0-40E6-8B18-2CBA1C6B3044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLibrary", "src\SampleLibrary\SampleLibrary.csproj", "{B4953BE5-72C0-40E6-8B18-2CBA1C6B3044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample1Library", "src\Sample1Library\Sample1Library.csproj", "{C1259ECD-B222-41A8-9309-78362AA3AEE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample1Library", "src\Sample1Library\Sample1Library.csproj", "{C1259ECD-B222-41A8-9309-78362AA3AEE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample2Library", "src\Sample2Library\Sample2Library.csproj", "{8D605B37-F409-4491-8BC3-6A0CBE1D601E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample2Library", "src\Sample2Library\Sample2Library.csproj", "{8D605B37-F409-4491-8BC3-6A0CBE1D601E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoVersion", "src\AutoVersion\AutoVersion.csproj", "{C74934B7-977F-4F76-B38A-6A67B0694C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoVersion", "src\AutoVersion\AutoVersion.csproj", "{C74934B7-977F-4F76-B38A-6A67B0694C42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRunCodeFixer.Library", "src\AutoRunCodeFixer.Library\AutoRunCodeFixer.Library.csproj", "{9D62040C-105A-48F0-B867-E4639338072F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3329A94B-57CA-4B50-A36A-7A32AAEDB384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -130,6 +129,21 @@ Global
 		{C74934B7-977F-4F76-B38A-6A67B0694C42}.Release|x64.Build.0 = Release|Any CPU
 		{C74934B7-977F-4F76-B38A-6A67B0694C42}.Release|x86.ActiveCfg = Release|Any CPU
 		{C74934B7-977F-4F76-B38A-6A67B0694C42}.Release|x86.Build.0 = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|x64.Build.0 = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D62040C-105A-48F0-B867-E4639338072F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3329A94B-57CA-4B50-A36A-7A32AAEDB384} = {E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}
@@ -140,5 +154,9 @@ Global
 		{C1259ECD-B222-41A8-9309-78362AA3AEE6} = {E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}
 		{8D605B37-F409-4491-8BC3-6A0CBE1D601E} = {E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}
 		{C74934B7-977F-4F76-B38A-6A67B0694C42} = {E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}
+		{9D62040C-105A-48F0-B867-E4639338072F} = {E2BCDF4D-BDCC-420D-BE49-1FF0EE6BCDB7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0EA1B7D-4A92-4491-BF51-D2072C5688BD}
 	EndGlobalSection
 EndGlobal

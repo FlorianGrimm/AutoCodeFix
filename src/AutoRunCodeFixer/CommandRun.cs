@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace AutoCodeFixer {
     public static class CommandRun {
         public static async Task<int> ExecuteAsync(FileInfo? fileSolution, FileInfo? fileProject, CancellationToken cancellationToken) {
+#warning extract and move to lib
             if (fileSolution is null && fileProject is null) {
                 string searchPath = System.Environment.CurrentDirectory;
                 var lstsln = System.IO.Directory.EnumerateFiles(searchPath, ".sln").ToList();

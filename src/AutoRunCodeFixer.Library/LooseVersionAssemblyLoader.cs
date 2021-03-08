@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 
 namespace AutoCodeFixer {
+
     internal static class LooseVersionAssemblyLoader {
         private static readonly Dictionary<string, Assembly> s_pathsToAssemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
         private static readonly Dictionary<string, Assembly> s_namesToAssemblies = new Dictionary<string, Assembly>();
@@ -18,6 +19,8 @@ namespace AutoCodeFixer {
         /// Register an assembly loader that will load assemblies with higher version than what was requested.
         /// </summary>
         public static void Register(string searchPath) {
+
+#if NETCOREAPP
             AssemblyLoadContext.Default.Resolving += (AssemblyLoadContext context, AssemblyName assemblyName) => {
                 lock (s_guard) {
                     if (s_namesToAssemblies.TryGetValue(assemblyName.FullName, out var assembly)) {
@@ -27,9 +30,13 @@ namespace AutoCodeFixer {
                     return TryResolveAssemblyFromPaths_NoLock(context, assemblyName, searchPath);
                 }
             };
+#else
+            System.AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+#endif
         }
 
-        private static Assembly TryResolveAssemblyFromPaths_NoLock(AssemblyLoadContext context, AssemblyName assemblyName, string searchPath) {
+#if NETCOREAPP
+        private static Assembly? TryResolveAssemblyFromPaths_NoLock(AssemblyLoadContext context, AssemblyName assemblyName, string searchPath) {
             foreach (var cultureSubfolder in string.IsNullOrEmpty(assemblyName.CultureName)
                 // If no culture is specified, attempt to load directly from
                 // the known dependency paths.
@@ -68,7 +75,12 @@ namespace AutoCodeFixer {
 
             return assembly;
         }
-    }
-}
+
+#else
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args) {
+            return null;
+        }
 
 #endif
+    }
+}

@@ -6,22 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 namespace AutoCodeFixer {
     public static class AnalyzerRunnerHelper {
-        public static void Initialize() {
+        public static void Initialize(bool? bCallLooseVersionAssemblyLoader = null) {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
             var instances = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version);
-            foreach (var instance in instances) {
-                Console.WriteLine($"Version: {instance.Version} MSBuildPath:{instance.MSBuildPath}");
-            }
+            //foreach (var instance in instances) {
+            //    Console.WriteLine($"Version: {instance.Version} MSBuildPath:{instance.MSBuildPath}");
+            //}
             var msBuildInstance = instances.First();
 
 #if NETCOREAPP
-            // Since we do not inherit msbuild.deps.json when referencing the SDK copy
-            // of MSBuild and because the SDK no longer ships with version matched assemblies, we
-            // register an assembly loader that will load assemblies from the msbuild path with
-            // equal or higher version numbers than requested.
-            LooseVersionAssemblyLoader.Register(msBuildInstance.MSBuildPath);
+            if (bCallLooseVersionAssemblyLoader == null) {
+                bCallLooseVersionAssemblyLoader = true;
+            }
 #endif
+            if (bCallLooseVersionAssemblyLoader == true) {
+                // Since we do not inherit msbuild.deps.json when referencing the SDK copy
+                // of MSBuild and because the SDK no longer ships with version matched assemblies, we
+                // register an assembly loader that will load assemblies from the msbuild path with
+                // equal or higher version numbers than requested.
+                LooseVersionAssemblyLoader.Register(msBuildInstance.MSBuildPath);
+            }
 
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
